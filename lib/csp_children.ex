@@ -1,6 +1,6 @@
 defmodule Csp.Children do
-  @entropy 3
-  @max_digit 3
+  @entropy 10
+  @max_digit 10
 
   # initialize children
   def init() do
