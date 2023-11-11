@@ -3,7 +3,11 @@ defmodule Csp do
   alias Csp.Solver
 
   def start(solution) do
+    IO.puts("CSP START --------------")
     q = Children.init()
-    Solver.solve({q, solution, :queue.len(q)})
+    arg = {q, solution, :queue.len(q)}
+    cp = [{Solver, arg}]
+    Supervisor.start_link(cp, strategy: :one_for_one)
+    IO.puts("CSP END --------------")
   end
 end

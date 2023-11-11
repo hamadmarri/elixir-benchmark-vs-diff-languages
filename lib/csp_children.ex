@@ -13,12 +13,12 @@ defmodule Csp.Children do
 
   def generate(q, parent_items, stat)
       when length(parent_items) >= @max_digit do
-    IO.puts("MAX DIGIT for #{inspect(parent_items)}")
+    # IO.puts("MAX DIGIT for #{inspect(parent_items)}")
     {q, stat}
   end
 
   def generate(q, parent_items, stat) do
-    IO.puts("GEN CHILDREN for #{inspect(parent_items)}")
+    # IO.puts("GEN CHILDREN for #{inspect(parent_items)}")
     children = Enum.to_list(1..@entropy)
     stat = stat + length(children)
 
