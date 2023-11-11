@@ -1,13 +1,22 @@
 defmodule Csp do
   alias Csp.Children
-  alias Csp.Solver
+  @timeout :timer.minutes(3)
 
   def start(solution) do
     IO.puts("CSP START --------------")
     q = Children.init()
     arg = {q, solution, :queue.len(q)}
-    cp = [{Solver, arg}]
-    Supervisor.start_link(cp, strategy: :one_for_one)
+    spin_solvers(arg)
     IO.puts("CSP END --------------")
+  end
+
+  defp spin_solvers(arg) do
+    :poolboy.transaction(
+      :solver,
+      fn pid ->
+        GenServer.cast(pid, {:solve, arg})
+      end,
+      @timeout
+    )
   end
 end

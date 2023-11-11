@@ -1,27 +1,40 @@
 defmodule Csp.Solver do
-  use Task
+  use GenServer
   alias Csp.Children
 
-  def start_link(arg) do
-    IO.puts("Solver START --------------")
-    Task.start_link(__MODULE__, :solve, [arg])
+  def start_link(_) do
+    GenServer.start_link(__MODULE__, nil)
   end
 
-  def solve({q, _, stat})
-      when q == {[], []} do
+  @impl GenServer
+  def init(_) do
+    IO.puts("Solver START #{inspect(self())} --------------")
+    {:ok, nil}
+  end
+
+  @impl GenServer
+  def handle_cast({:solve, arg = {q, solution, stat}}, state) do
+    solve(arg)
+    {:noreply, state}
+  end
+
+  defp solve({q, _, stat})
+       when q == {[], []} do
     IO.puts("q IS EMPTY!, QUITTING!, count: #{stat}")
     :exit
   end
 
-  def solve({q, solution, stat}) do
+  defp solve({q, solution, stat}) do
     # IO.puts("QUEUE: #{inspect(:queue.to_list(q))}")
     {item, q} = pop_item(q)
 
     # check if it is a solution?
     case is_solution?({item, solution}) do
       true ->
-        IO.puts("FOUND A SOLUTION "
-          <> "#{inspect(item, charlists: :as_list)}, count: #{stat}")
+        IO.puts(
+          "FOUND A SOLUTION " <>
+            "#{inspect(item, charlists: :as_list)}, count: #{stat}"
+        )
 
       false ->
         # if not, generate children from this item

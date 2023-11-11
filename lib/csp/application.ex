@@ -5,11 +5,21 @@ defmodule Csp.Application do
 
   use Application
 
+  defp poolboy_config do
+    [
+      name: {:local, :solver},
+      worker_module: Csp.Solver,
+      size: 8,
+      max_overflow: 2
+    ]
+  end
+
   @impl true
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Csp.Worker.start_link(arg)
       # {Csp.Worker, arg}
+      :poolboy.child_spec(:solver, poolboy_config())
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
