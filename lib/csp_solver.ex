@@ -17,12 +17,13 @@ defmodule Csp.Solver do
         IO.puts("FOUND A SOLUTION #{inspect(item)}, count: #{stat}")
 
       false ->
+        # if not, generate children from this item
         {q, stat} = Children.generate(q, item, stat)
         solve({q, solution, stat})
     end
   end
 
-  def is_solution?({item, solution}) do
+  defp is_solution?({item, solution}) do
     item == solution
   end
 
