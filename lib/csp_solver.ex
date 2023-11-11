@@ -13,15 +13,31 @@ defmodule Csp.Solver do
   end
 
   @impl GenServer
-  def handle_cast({:solve, arg = {q, solution, stat}}, state) do
+  def handle_cast({:solve, arg = {q, _solution, _stat}}, state) do
+    IO.puts("handling #{inspect(q, charlists: :as_list)}")
     solve(arg)
     {:noreply, state}
   end
 
+  defp exit_with(:success, {item, stat}) do
+    IO.puts(
+      "FOUND A SOLUTION from #{inspect(self())} " <>
+        "#{inspect(item, charlists: :as_list)}, count: #{stat}"
+    )
+
+    :poolboy.checkin(:solver, self())
+    :ok
+  end
+
+  defp exit_with(:fail, _) do
+    :poolboy.checkin(:solver, self())
+    :fail
+  end
+
   defp solve({q, _, stat})
        when q == {[], []} do
-    IO.puts("q IS EMPTY!, QUITTING!, count: #{stat}")
-    :exit
+    IO.puts("q IS EMPTY!, QUITTING!, #{inspect(self())} count: #{stat}")
+    exit_with(:fail, nil)
   end
 
   defp solve({q, solution, stat}) do
@@ -31,10 +47,7 @@ defmodule Csp.Solver do
     # check if it is a solution?
     case is_solution?({item, solution}) do
       true ->
-        IO.puts(
-          "FOUND A SOLUTION " <>
-            "#{inspect(item, charlists: :as_list)}, count: #{stat}"
-        )
+        exit_with(:success, {item, stat})
 
       false ->
         # if not, generate children from this item

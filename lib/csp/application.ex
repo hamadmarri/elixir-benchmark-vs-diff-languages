@@ -9,8 +9,8 @@ defmodule Csp.Application do
     [
       name: {:local, :solver},
       worker_module: Csp.Solver,
-      size: 8,
-      max_overflow: 2
+      size: 9,
+      max_overflow: 0
     ]
   end
 
