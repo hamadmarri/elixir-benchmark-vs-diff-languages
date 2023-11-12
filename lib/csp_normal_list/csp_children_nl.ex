@@ -1,13 +1,15 @@
 defmodule Csp.NormalList.Children do
-  @entropy 9 # 8
-  @max_digit 9 # 8
+  # 8
+  @entropy 7
+  # 8
+  @max_digit 7
 
   # initialize children
   def init() do
     # IO.puts("q INIT CHILDREN")
 
-    # in the form [1], [2], ..
-    Enum.to_list(1..@entropy) |> Enum.map(&[&1]) |> Enum.reverse()
+    # in the form .., [2], [1]
+    @entropy..1 |> Stream.map(&[&1])
   end
 
   def generate(q, parent_items, stat)
@@ -18,12 +20,21 @@ defmodule Csp.NormalList.Children do
 
   def generate(q, parent_items, stat) do
     # IO.puts("GEN CHILDREN for #{inspect(parent_items)}")
-    children = Enum.to_list(1..@entropy)
-    stat = stat + length(children)
+
+    children =
+      Stream.map(1..@entropy, fn c ->
+        [c | parent_items]
+      end)
+
+    # IO.puts("CHI")
+    # IO.inspect(Enum.to_list(children))
 
     # create separate lists for each child
-    q = Enum.reduce(children, q, fn c, q -> [[c | parent_items] | q] end)
+    q =
+      Enum.reduce(children, q, fn c, q -> [c | q] end)
+      |> Stream.each(&[&1])
 
-    {q, stat}
+    # IO.inspect(Enum.to_list(q))
+    {q, stat + @entropy}
   end
 end

@@ -10,9 +10,15 @@ defmodule Csp.NormalList.Solver do
     :ok
   end
 
+  # def solve({_, _, stat}) when stat >= 10 do
+  #   nil
+  # end
+
   def solve({q, solution, stat}) do
-    # IO.puts("QUEUE: #{inspect(q)}")
-    item = hd(q)
+    # IO.puts("QUEUE: #{inspect(Enum.to_list(q))}")
+
+    item = Enum.at(q, 0)
+    # IO.inspect(item)
 
     # check if it is a solution?
     case is_solution?({item, solution}) do
@@ -22,7 +28,7 @@ defmodule Csp.NormalList.Solver do
 
       false ->
         # if not, generate children from this item
-        {q, stat} = Children.generate(tl(q), item, stat)
+        {q, stat} = Children.generate(Enum.drop(q, 1), item, stat)
         solve({q, solution, stat})
     end
   end

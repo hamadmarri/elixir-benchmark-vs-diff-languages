@@ -5,7 +5,7 @@ defmodule Bench.CspBench do
         # ":queue" => fn -> Csp.start([7, 7, 7, 7, 7, 7, 7, 9]) end,
         "list" => fn -> Csp.NormalList.start([7, 7, 7, 7, 7, 7, 7, 10]) end,
       },
-      time: 30
+      time: 5
     )
   end
 end
