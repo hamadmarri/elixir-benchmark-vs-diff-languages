@@ -1,5 +1,5 @@
 defmodule Csp.Children do
-  @entropy 8
+  @entropy 10
   @max_digit 8
 
   # initialize children

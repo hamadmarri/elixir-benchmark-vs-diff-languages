@@ -1,5 +1,6 @@
 defmodule Csp do
   alias Csp.Children
+  @timeout :timer.minutes(3)
 
   def start(solution) do
     IO.puts("CSP START --------------")
@@ -21,7 +22,7 @@ defmodule Csp do
   end
 
   defp spin(arg) do
-    p = :poolboy.checkout(:solver)
+    p = :poolboy.checkout(:solver, true, @timeout)
     GenServer.cast(p, {:solve, arg})
   end
 end
