@@ -5,7 +5,7 @@ defmodule Csp do
   def start(solution) do
     IO.puts("CSP START --------------")
     q = Children.init()
-    spin_solvers({q, solution, :queue.len(q)})
+    spin_solvers({q, solution, length(q)})
     IO.puts("CSP END --------------")
   end
 
@@ -13,10 +13,8 @@ defmodule Csp do
     IO.puts("SPIN INIT #{inspect(q, charlists: :as_list)}")
     count = stat
     Enum.reduce(1..count, q, fn _, q ->
-      e = [:queue.get(q)]
-      q = :queue.drop(q)
-      s = :queue.from_list(e)
-      spin({s, solution, stat})
+      [e | q] = q
+      spin({[e], solution, stat})
       q
     end)
   end

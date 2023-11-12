@@ -34,14 +34,13 @@ defmodule Csp.Solver do
     :fail
   end
 
-  defp solve({q, _, stat})
-       when q == {[], []} do
+  defp solve({q, _, stat}) when q == [] do
     IO.puts("q IS EMPTY!, QUITTING!, #{inspect(self())} count: #{stat}")
     exit_with(:fail, nil)
   end
 
   defp solve({q, solution, stat}) do
-    # IO.puts("QUEUE: #{inspect(:queue.to_list(q))}")
+    # IO.puts("QUEUE: #{inspect(q)}")
     {item, q} = pop_item(q)
 
     # check if it is a solution?
@@ -61,8 +60,7 @@ defmodule Csp.Solver do
   end
 
   defp pop_item(q) do
-    item = :queue.get(q)
-    q = :queue.drop(q)
+    [item | q] = q
     # IO.puts("SOLVE: #{inspect(item, charlists: :as_list)}")
     {item, q}
   end
