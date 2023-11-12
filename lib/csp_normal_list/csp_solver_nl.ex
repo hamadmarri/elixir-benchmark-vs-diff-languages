@@ -1,14 +1,13 @@
-defmodule Csp.Solver do
-  alias Csp.Children
+defmodule Csp.NormalList.Solver do
+  alias Csp.NormalList.Children
 
-  def solve({q, _, stat})
-      when q == {[], []} do
+  def solve({q, _, stat}) when q == [] do
     IO.puts("q IS EMPTY!, QUITTING!, count: #{stat}")
     :exit
   end
 
   def solve({q, solution, stat}) do
-    # IO.puts("QUEUE: #{inspect(:queue.to_list(q))}")
+    # IO.puts("QUEUE: #{inspect(q)}")
     {item, q} = pop_item(q)
 
     # check if it is a solution?
@@ -28,8 +27,7 @@ defmodule Csp.Solver do
   end
 
   defp pop_item(q) do
-    item = :queue.get_r(q)
-    q = :queue.drop_r(q)
+    [item | q] = q
     # IO.puts("SOLVE: #{inspect(item)}")
     {item, q}
   end

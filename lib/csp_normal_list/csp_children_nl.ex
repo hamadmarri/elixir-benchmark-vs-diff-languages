@@ -1,4 +1,4 @@
-defmodule Csp.Children do
+defmodule Csp.NormalList.Children do
   @entropy 8
   @max_digit 8
 
@@ -7,8 +7,7 @@ defmodule Csp.Children do
     IO.puts("q INIT CHILDREN")
 
     # in the form [1], [2], ..
-    children = Enum.to_list(1..@entropy) |> Enum.map(&[&1]) |> Enum.reverse()
-    :queue.from_list(children)
+    Enum.to_list(1..@entropy) |> Enum.map(&[&1])
   end
 
   def generate(q, parent_items, stat)
@@ -22,17 +21,9 @@ defmodule Csp.Children do
     children = Enum.to_list(1..@entropy)
     stat = stat + length(children)
 
-    case Enum.empty?(children) do
-      true ->
-        {q, stat}
+    # create separate lists for each child
+    q = Enum.reduce(children, q, fn c, q -> [[c | parent_items] | q] end)
 
-      false ->
-        # create separate lists for each child
-        new_items = for c <- children, do: [c | parent_items]
-
-        # add new items to the queue
-        q = new_items |> Enum.reduce(q, fn n, q -> :queue.in(n, q) end)
-        {q, stat}
-    end
+    {q, stat}
   end
 end
