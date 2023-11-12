@@ -8,30 +8,35 @@ defmodule Csp.Solver do
 
   @impl GenServer
   def init(_) do
-    IO.puts("Solver START #{inspect(self())} --------------")
+    # IO.puts("Solver START #{inspect(self())} --------------")
     {:ok, nil}
   end
 
   @impl GenServer
   def handle_cast({:solve, arg = {q, _solution, _stat}}, state) do
-    IO.puts("handling #{inspect(q, charlists: :as_list)}")
+    # IO.puts("solver #{inspect(self())} HANDLING #{inspect(q, charlists: :as_list)}")
     solve(arg)
     {:noreply, state}
   end
 
   defp exit_with(:success, {item, stat}) do
     IO.puts(
-      "FOUND A SOLUTION from #{inspect(self())} " <>
+      "----------- FOUND A SOLUTION from #{inspect(self())} " <>
         "#{inspect(item, charlists: :as_list)}, count: #{stat}"
     )
 
     :poolboy.checkin(:solver, self())
-    :ok
+    {:ok, :success}
   end
 
   defp exit_with(:fail, _) do
     :poolboy.checkin(:solver, self())
-    :fail
+    {:ok, :fail}
+  end
+
+  defp exit_with(:continue, _) do
+    :poolboy.checkin(:solver, self())
+    {:ok, :continue}
   end
 
   defp solve({q, _, stat})
@@ -52,7 +57,15 @@ defmodule Csp.Solver do
       false ->
         # if not, generate children from this item
         {q, stat} = Children.generate(q, item, stat)
-        solve({q, solution, stat})
+
+        case :queue.is_empty(q) do
+          true ->
+            exit_with(:fail, nil)
+
+          false ->
+            Csp.spin_solvers_from(self(), {q, solution, stat})
+            exit_with(:continue, nil)
+        end
     end
   end
 
