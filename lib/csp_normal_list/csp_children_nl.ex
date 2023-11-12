@@ -1,13 +1,13 @@
 defmodule Csp.NormalList.Children do
-  @entropy 8
-  @max_digit 8
+  @entropy 9 # 8
+  @max_digit 9 # 8
 
   # initialize children
   def init() do
-    IO.puts("q INIT CHILDREN")
+    # IO.puts("q INIT CHILDREN")
 
     # in the form [1], [2], ..
-    Enum.to_list(1..@entropy) |> Enum.map(&[&1])
+    Enum.to_list(1..@entropy) |> Enum.map(&[&1]) |> Enum.reverse()
   end
 
   def generate(q, parent_items, stat)
