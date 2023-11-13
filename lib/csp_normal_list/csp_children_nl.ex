@@ -18,12 +18,9 @@ defmodule Csp.NormalList.Children do
 
   def generate(q, parent_items, stat) do
     # IO.puts("GEN CHILDREN for #{inspect(parent_items)}")
-    children = Enum.to_list(1..@entropy)
-    stat = stat + length(children)
+    children = for c <- 1..@entropy, do: [c | parent_items]
 
-    # create separate lists for each child
-    q = Enum.reduce(children, q, fn c, q -> [[c | parent_items] | q] end)
-
-    {q, stat}
+    # add children to stack
+    {children ++ q, stat + @entropy}
   end
 end
