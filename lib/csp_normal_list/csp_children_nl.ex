@@ -1,6 +1,6 @@
 defmodule Csp.NormalList.Children do
-  @entropy 9 # 8
-  @max_digit 9 # 8
+  @entropy 9
+  @max_digit 9
 
   # initialize children
   def init() do
