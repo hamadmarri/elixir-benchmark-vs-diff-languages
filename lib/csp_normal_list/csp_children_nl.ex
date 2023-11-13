@@ -1,6 +1,6 @@
 defmodule Csp.NormalList.Children do
-  @entropy 9
-  @max_digit 9
+  @entropy 10
+  @max_digit 10
 
   # initialize children
   def init() do
@@ -18,7 +18,7 @@ defmodule Csp.NormalList.Children do
 
   def generate(q, parent_items, stat) do
     # IO.puts("GEN CHILDREN for #{inspect(parent_items)}")
-    children = for c <- 1..@entropy, do: [c | parent_items]
+    children = for c <- @entropy..1, do: [c | parent_items]
 
     # add children to stack
     {children ++ q, stat + @entropy}
