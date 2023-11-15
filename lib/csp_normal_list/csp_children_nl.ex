@@ -22,19 +22,12 @@ defmodule Csp.NormalList.Children do
 
     {_, rest} = Range.split(children, 1)
 
-    case rest do
-      0..1//-1 ->
-        # IO.puts("generate: 0..1//-1")
-        {tl(q), stat}
+    new_head = {parent, rest}
+    q = [new_head | tl(q)]
+    gen = {parent_items, @entropy..1//-1}
+    q = [gen | q]
 
-      _ ->
-        new_head = {parent, rest}
-        q = [new_head | tl(q)]
-        gen = {parent_items, @entropy..1//-1}
-        q = [gen | q]
-
-        # add children to stack
-        {q, stat + @entropy}
-    end
+    # add children to stack
+    {q, stat + @entropy}
   end
 end
