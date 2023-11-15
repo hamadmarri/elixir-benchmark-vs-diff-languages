@@ -5,22 +5,34 @@ defmodule Csp.NormalList.Children do
   # initialize children
   def init() do
     # IO.puts("q INIT CHILDREN")
-
-    # in the form [1], [2], ..
-    Enum.to_list(@entropy..1//-1) |> Enum.map(&[&1])
+    [{[], 3..1//-1}]
   end
 
-  def generate(q, parent_items, stat)
+  def generate(q, parent, parent_items, children, stat)
       when length(parent_items) >= @max_digit do
     # IO.puts("MAX DIGIT for #{inspect(parent_items)}")
+    {_, rest} = Range.split(children, 1)
+    new_head = {parent, rest}
+    q = [new_head | tl(q)]
     {q, stat}
   end
 
-  def generate(q, parent_items, stat) do
+  def generate(q, _parent, parent_items, _children, stat)
+      when parent_items == [] do
+    # IO.puts("DONE WITH #{inspect(parent_items)}")
+    {tl(q), stat}
+  end
+
+  def generate(q, parent, parent_items, children, stat) do
     # IO.puts("GEN CHILDREN for #{inspect(parent_items)}")
-    children = for c <- @entropy..1//-1, do: [c | parent_items]
+
+    {_, rest} = Range.split(children, 1)
+    new_head = {parent, rest}
+    q = [new_head | tl(q)]
+    gen = {parent_items, 3..1//-1}
+    q = [gen | q]
 
     # add children to stack
-    {children ++ q, stat + @entropy}
+    {q, stat + @entropy}
   end
 end
