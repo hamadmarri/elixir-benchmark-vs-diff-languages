@@ -14,20 +14,20 @@ defmodule Csp.NormalList.Solver do
     # IO.puts("QUEUE: #{inspect(q)}")
     head = hd(q)
     {parent, children_r} = head
-    children = Enum.take(children_r, 1)
-    item = parent ++ children
+    item = parent ++ Enum.take(children_r, 1)
 
     # IO.puts("ITEM: #{inspect(item)}")
 
-    solve_helper({q, solution, parent, item, children, children_r, stat})
+    solve_helper({q, solution, parent, item, children_r, stat})
   end
 
-  defp solve_helper({q, solution, _parent, _item, children, _children_r, stat})
-       when children == [] do
+  defp solve_helper({q, solution, _parent, _item, children_r, stat})
+       when children_r == 0..1//-1 do
+    # IO.puts("solver_helper: children == []")
     solve({tl(q), solution, stat})
   end
 
-  defp solve_helper({q, solution, parent, item, _children, children_r, stat}) do
+  defp solve_helper({q, solution, parent, item, children_r, stat}) do
     # check if it is a solution?
     case is_solution?({item, solution}) do
       true ->
