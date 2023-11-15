@@ -5,7 +5,7 @@ defmodule Csp.NormalList.Children do
   # initialize children
   def init() do
     # IO.puts("q INIT CHILDREN")
-    [{[], 3..1//-1}]
+    [{[], @entropy..1//-1}]
   end
 
   def generate(q, parent, parent_items, children, stat)
@@ -29,7 +29,7 @@ defmodule Csp.NormalList.Children do
     {_, rest} = Range.split(children, 1)
     new_head = {parent, rest}
     q = [new_head | tl(q)]
-    gen = {parent_items, 3..1//-1}
+    gen = {parent_items, @entropy..1//-1}
     q = [gen | q]
 
     # add children to stack
