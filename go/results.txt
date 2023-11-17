@@ -1,0 +1,66 @@
+GOGC=5000 ./csp
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.245234s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.135782s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.185277s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.275122s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.351595s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.387182s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.352503s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.255498s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.397983s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 17.296624s
+
+total: 172.8828s
+average: 17.28828
+
+./csp
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 20.005301s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 20.236505s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 20.054617s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 20.094798s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 20.108985s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 19.991453s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 19.988256s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 20.064599s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 20.203230s
+init stack [[1] [2] [3] [4] [5] [6] [7] [8] [9] [10]] 
+FOUND A SOLUTION [7 7 7 7 7 7 7 5 10], count: 592592650
+time: 20.103376s
