@@ -14,7 +14,7 @@ I changed the default slice capacity in Go. After that Go become faster by 2x.
 So, it seems that the Go's slice initial capacity has much effects in performance.
 
 Anyways, with the final optimizations on Elixir, Go, and Java, Elixir in this test
-is faster than Java by about 2x, and slower than Go by 1.3x
+is faster than Java by about 2x, and slower than Go by 1.2x
 
 It is quite surprizing how Elixir is comparable with a complied language such
 as Go. Next I am planning to test C++ or C to see how far we are from almost
@@ -23,8 +23,8 @@ optimum speed.
 ## Results
 
 * Go average: 17.28828s ~17.3s
-* Elixir average: 22089813us ~22.1s - 1.3x slower than Go
-* Java average: 41.5353454s ~41.5s - 2.4x slower than Go and 1.9x slower than Elixir
+* Elixir average: 21049749us ~21s / 3.75s / 1.22x slower than Go
+* Java average: 41.5353454s ~41.5s - 2.4x slower than Go and 1.97x slower than Elixir
 
 ## Summary
 Even thought some benchmarks on the Internet shows that Elixir might be not fast on computation or calculation tasks, Elixir in the DFS test is almost as a compiled 
