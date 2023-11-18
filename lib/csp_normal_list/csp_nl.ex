@@ -6,7 +6,7 @@ defmodule Csp.NormalList do
       :timer.tc(fn ->
         q = Solver.init()
         IO.puts("QUEUE: #{inspect(q)}")
-        Solver.solve({q, solution, length(q)})
+        Solver.solve(q, solution, length(q))
       end)
       |> IO.inspect()
     end)

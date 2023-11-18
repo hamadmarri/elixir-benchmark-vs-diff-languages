@@ -1,9 +1,9 @@
 defmodule Csp.NormalList.Solver do
-  @compile {:inline, is_solution?: 2, generate: 3}
+  @compile {:inline, is_solution?: 2, generate: 3, solve: 3}
 
   @entropy 10
-  @max_digit 10
-  @rng [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+  @max_digit @entropy
+  @rng @entropy..1
 
   def init() do
     # IO.puts("q INIT CHILDREN")
@@ -25,7 +25,7 @@ defmodule Csp.NormalList.Solver do
     end
   end
 
-  def solve({q, solution, stat}) do
+  def solve(q, solution, stat) do
     # IO.puts("QUEUE: #{inspect(q)}")
     item = hd(q)
 
@@ -45,7 +45,7 @@ defmodule Csp.NormalList.Solver do
             :exit
 
           false ->
-            solve({q, solution, stat})
+            solve(q, solution, stat)
         end
     end
   end

@@ -2,40 +2,40 @@ MIX_ENV=prod iex --erl "+a 8192 +hms 29824" -S mix # best so far
 Erlang/OTP 26 [erts-14.1.1] [source] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:1] [jit:ns]
 
 Interactive Elixir (1.15.7) - press Ctrl+C to exit (type h() ENTER for help)
-iex(1)> Csp.NormalList.start([7, 7, 7, 7, 7, 7, 7, 5, 10], 10)
+iex(1)> iex(1)> Csp.NormalList.start([7, 7, 7, 7, 7, 7, 7, 5, 10], 10)
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{20353968, :ok}
+{20985293, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{20381818, :ok}
+{21175791, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{20415663, :ok}
+{21233216, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{22205812, :ok}
+{21144095, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{22789949, :ok}
+{21163276, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{23241082, :ok}
+{21125364, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{23308522, :ok}
+{20989800, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{23592666, :ok}
+{20958159, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{22264649, :ok}
+{20834648, :ok}
 QUEUE: [~c"\n", ~c"\t", ~c"\b", ~c"\a", [6], [5], [4], [3], [2], [1]]
 FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
-{22344001, :ok}
+{20887855, :ok}
 
-total: 220898130
-average: 22089813 ~22s / 4.79s / 1.3x slower than go
+total: 210497497
+average: 21049749 ~21s / 3.75s / 1.22x slower than Go
 
 
 
