@@ -35,7 +35,7 @@ FOUND A SOLUTION [7, 7, 7, 7, 7, 7, 7, 5, 10], count: 592592650
 {22344001, :ok}
 
 total: 220898130
-average: 22089813 ~22s / 4.79s / 1.2x slower than go
+average: 22089813 ~22s / 4.79s / 1.3x slower than go
 
 
 
