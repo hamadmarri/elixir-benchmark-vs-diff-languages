@@ -22,9 +22,9 @@ optimum speed.
 
 ## Results
 
-Go average: 17.28828s ~17.3s
-Elixir average: 22089813us ~22.1s - 1.3x slower than Go
-Java average: 41.5353454s ~41.5s - 2.4x slower than Go and 1.9x slower than Elixir
+* Go average: 17.28828s ~17.3s
+* Elixir average: 22089813us ~22.1s - 1.3x slower than Go
+* Java average: 41.5353454s ~41.5s - 2.4x slower than Go and 1.9x slower than Elixir
 
 ## Summary
 Even thought some benchmarks on the Internet shows that Elixir might be not fast on computation or calculation tasks, Elixir in the DFS test is almost as a compiled 
