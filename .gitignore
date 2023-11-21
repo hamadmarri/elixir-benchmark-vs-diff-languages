@@ -26,3 +26,5 @@ csp-*.tar
 /tmp/
 
 .vscode/
+
+*.class
