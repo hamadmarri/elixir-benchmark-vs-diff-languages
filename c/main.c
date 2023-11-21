@@ -2,9 +2,9 @@
 #include "stdlib.h"
 #include <time.h>
 
-const int entropy = 9;
+const int entropy = 10;
 const int max_digit = entropy;
-const int solution_size = 9;
+#define solution_size 9
 
 struct stack_int
 {
@@ -50,13 +50,15 @@ struct stack_int *pop_stack_int(struct stack_int **s)
 void print_stack_int(struct stack_int *s)
 {
     struct stack_int *n = s;
-    printf("[");
+    printf("[ ");
     while (n)
     {
-        printf("%d ", n->value);
+        //printf("%d -> %p ", n->value, n->next);
+	printf("%d ", n->value);
         n = n->next;
     }
-    printf("]s:%d ", s->count);
+    //printf("]s:%d ", s->count);
+    printf("] ");
 }
 
 void push_stack_stack(struct stack_stack **s, struct stack_int *v)
@@ -103,6 +105,51 @@ struct stack_stack *initCh(int *stat)
     return ss;
 }
 
+void distroy_stack_ints(struct stack_int *item)
+{
+	struct stack_int *h;
+
+	while (item && item->ref_num == 0) {
+		//printf("FREE S_INT ");
+		//print_stack_int(item);
+		h = item->next;
+		free(item);
+		//printf(" ;\n");
+		item = h;
+		if (item) {
+			item->ref_num--;
+			//printf("ref_num: %d\n", item->ref_num);
+		}
+	} 
+}
+
+void distroy_stacks(struct stack_stack *ss)
+{
+    struct stack_stack *itr_ss = ss;
+    struct stack_int *itr_s = NULL;
+    struct stack_stack *s;
+    struct stack_int *n;
+
+    //printf("call distroy_stacks\n");
+
+    while (itr_ss)
+    {
+	s = itr_ss;
+
+	itr_s = itr_ss->value;
+
+	itr_ss = itr_ss->next;
+        free(s);
+
+	while (itr_s)
+        {
+		n = itr_s;
+                itr_s = itr_s->next;
+                free(n);
+	}
+    }
+}
+
 int is_solution(struct stack_int *item, int *solution)
 {
     int i;
@@ -145,10 +192,13 @@ void genCh(struct stack_stack **ss, struct stack_int *parent_items, int *stat)
 
 void solve(struct stack_stack *ss, int *solution, int *stat)
 {
+    struct stack_stack *item_ss;
+    struct stack_int *item;
+
     while (1)
     {
-        // printf("SOLVE: ");
-        // print_stack_stack(ss);
+        //printf("SOLVE: ");
+        //print_stack_stack(ss);
 
         if (ss == NULL)
         {
@@ -157,13 +207,16 @@ void solve(struct stack_stack *ss, int *solution, int *stat)
         }
 
         // pop
-        struct stack_stack *item_ss = pop_stack_stack(&ss);
-        struct stack_int *item = item_ss->value;
+        item_ss = pop_stack_stack(&ss);
+        item = item_ss->value;
+	//printf("FREE SS ");
+	//print_stack_int(item_ss->value);
         free(item_ss);
+	//printf("\n");
 
-        // printf("ITEM: ");
-        // print_stack_int(item);
-        // printf("\n");
+	//printf("ITEM: ");
+	//print_stack_int(item);
+	//printf("\n");
 
         // check
         if (is_solution(item, solution))
@@ -171,18 +224,15 @@ void solve(struct stack_stack *ss, int *solution, int *stat)
             printf("FOUND A SOLUTION: ");
             print_stack_int(item);
             printf("count: %d\n", *stat);
+	    distroy_stack_ints(item);
+	    distroy_stacks(ss);
             return;
         }
 
         // gen
         genCh(&ss, item, stat);
         
-        // if (item->ref_num == 0) {
-            free(item);
-        // } 
-        // else {
-        //     printf("cant free item ");
-        // }
+        distroy_stack_ints(item);
     }
 }
 
@@ -194,10 +244,12 @@ int main()
     int stat = 0;
     struct stack_stack *ss = initCh(&stat);
     int solution[solution_size] = {7, 7, 7, 7, 7, 7, 7, 5, 10};
+    //int solution[solution_size] = {2, 1, 3};
 
     print_stack_stack(ss);
 
     solve(ss, solution, &stat);
+
     clock_gettime(CLOCK_MONOTONIC, &end);
 
     long long duration = (end.tv_sec - start.tv_sec) * 1000000LL + (end.tv_nsec - start.tv_nsec) / 1000LL;
