@@ -36,8 +36,9 @@ public class Main {
         }
 
         for (int i = 1; i <= entropy; i++) {
-            List<Integer> ch = new ArrayList<>(parentItems);
-            ch.add(0, i);
+            List<Integer> ch = new ArrayList<>();
+            ch.add(i);
+            ch.addAll(parentItems);
 
             // System.out.printf("children: %s\n", ch);
             stack.push(ch);
